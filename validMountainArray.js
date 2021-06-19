@@ -1,33 +1,17 @@
 const validMountainArray = (arr) => {
-  // if (arr.length < 3) {
-  //   return false;
-  // }
-  // let indexFromLeft = 0;
-  // for (let i = 0; i < arr.length; i++) {
-  //   const num = arr[i];
-  //   if (num === arr[i + 1]) {
-  //     return false;
-  //   }
-  //   if (num < arr[i + 1]) {
-  //     indexFromLeft = i + 1;
-  //     // console.log("yo from the sis");
-  //   }
-  // }
-  // let indexFromRight = null;
-  // for (let i = arr.length - 1; i > 0; i--) {
-  //   const num = arr[i];
-  //   if (num === arr[i - 1]) {
-  //     return false;
-  //   }
-  //   if (num < arr[i - 1]) {
-  //     indexFromRight = i - 1;
-  //   }
-  //   if (i - 1 === 0) {
-  //     return false;
-  //   }
-  // }
-  // // console.log("check: ", indexFromLeft, indexFromRight);
-  // return indexFromLeft === indexFromRight;
+  let maxIndex = null;
+  for (let i = 1; i <= arr.length - 1; i++) {
+    if (maxIndex === null) {
+      if (arr[i] < arr[i - 1]) {
+        maxIndex = i - 1;
+      } else if (arr[i] === arr[i - 1]) {
+        return false;
+      }
+    } else if (arr[i] >= arr[i - 1]) {
+      return false;
+    }
+  }
+  return maxIndex > 0 && maxIndex < arr.length - 1;
 };
 
 // Tests
@@ -46,3 +30,31 @@ console.log(validMountainArray(arr4)); //false
 console.log(validMountainArray(arr5)); //false
 console.log(validMountainArray(arr6)); //false
 console.log(validMountainArray(arr7)); //true
+
+// if (arr.length < 3) {
+//   return false;
+// }
+// let indexFromLeft = 0;
+// for (let i = 0; i < arr.length; i++) {
+//   const num = arr[i];
+//   if (num === arr[i + 1]) {
+//     return false;
+//   }
+//   if (num < arr[i + 1]) {
+//     indexFromLeft = i + 1;
+//   }
+// }
+// let indexFromRight = null;
+// for (let i = arr.length - 1; i > 0; i--) {
+//   const num = arr[i];
+//   if (num === arr[i - 1]) {
+//     return false;
+//   }
+//   if (num < arr[i - 1]) {
+//     indexFromRight = i - 1;
+//   }
+//   if (i - 1 === 0 && num < arr[i - 1]) {
+//     indexFromRight++;
+//   }
+// }
+// return indexFromLeft === indexFromRight;
