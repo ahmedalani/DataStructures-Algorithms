@@ -16,7 +16,6 @@ var MyLinkedList = function () {
  * @return {number}
  */
 MyLinkedList.prototype.get = function (index) {
-  // console.log("from Get index: ", this);
   if (index > this.length - 1) return -1; // >= becasue index is 0 based
 
   let node = this.head,
@@ -119,3 +118,96 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
   node.next = node.next.next;
   this.length--;
 };
+
+// class version, works well but apparently slower 🤨
+/*
+class Node {
+  constructor(data = null, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
+class MyLinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+  get(index) {
+    if (index > this.length - 1) return -1; // >= becasue index is 0 based
+
+    let node = this.head,
+      i = 0;
+
+    while (i < index) {
+      i++;
+      node = node.next;
+    }
+
+    return node.data;
+  }
+  addAtHead(val) {
+    const node = new Node(val, this.head);
+    this.head = node;
+    this.length++;
+  }
+  addAtTail(val) {
+    const node = new Node(val);
+    if (!this.head) {
+      this.head = node;
+      this.length++;
+      return;
+    }
+    let lastNode = this.head;
+    while (lastNode.next) {
+      lastNode = lastNode.next;
+    }
+    lastNode.next = node;
+    this.length++;
+  }
+  addAtIndex(index, val) {
+    if (index > this.length) return;
+
+    const newNode = new Node(val);
+    if (index === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+      return;
+    }
+
+    if (index === this.length) {
+      this.addAtTail(val);
+      return;
+    }
+
+    let i = 0,
+      node = this.head;
+
+    while (i < index - 1) {
+      node = node.next;
+      i++;
+    }
+    newNode.next = node.next;
+    node.next = newNode;
+
+    this.length++;
+  }
+  deleteAtIndex(index) {
+    if (index > this.length - 1) return;
+    if (index === 0) {
+      this.head = this.head.next;
+      this.length--;
+      return;
+    }
+
+    let i = 0,
+      node = this.head;
+    while (i < index - 1) {
+      node = node.next;
+      i++;
+    }
+    node.next = node.next.next;
+    this.length--;
+  }
+}
+*/
