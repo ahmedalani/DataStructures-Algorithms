@@ -119,7 +119,7 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
   this.length--;
 };
 
-// class version, works well but apparently slower 🤨
+// class version; works well but apparently slower 🤨
 /*
 class Node {
   constructor(data = null, next = null) {
